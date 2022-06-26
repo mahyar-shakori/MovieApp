@@ -11,10 +11,11 @@ import RealmSwift
 class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableview: UITableView!
+    
     var list = [Movie]()
     var realm : Realm?
     
-    @IBAction func backBtn2(_ sender: UIButton) {
+    @IBAction func backButtonTapped(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "homePage")
         self.navigationController?.show(vc!, sender: nil)
     }
@@ -26,7 +27,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.loadValues()
         
     }
-    
     
     func loadValues() {
         self.list = Array(try! Realm().objects(Movie.self))
@@ -59,14 +59,5 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
         } else if editingStyle == .insert {
         }
-        
     }
-    
 }
-
-
-
-
-
-
-

@@ -19,15 +19,10 @@ class HomeViewController: UIViewController {
     
     
     
-    @IBAction func logOutBtn(_ sender: UIButton) {
+    @IBAction func logOutButtonTapped(_ sender: UIButton) {
         UserDefaults.standard.set(false, forKey: "isLogin")
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "login")
         self.navigationController?.show(vc!, sender: nil)
     }
-    
-    
-    
-    
 }
-

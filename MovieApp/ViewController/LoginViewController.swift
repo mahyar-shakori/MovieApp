@@ -12,7 +12,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var loginOutlet: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     
     var usernameTextFieldvalid = false
     var passwordTextFieldvalid = false
@@ -21,7 +21,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.loginOutlet.backgroundColor = UIColor.init(red: 128/255, green: 102/255, blue: 56/255, alpha: 1.0)
+        self.loginButton.backgroundColor = UIColor.init(red: 128/255, green: 102/255, blue: 56/255, alpha: 1.0)
         self.usernameTextField.delegate = self
         self.passwordTextField.delegate = self
         
@@ -32,7 +32,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if let text = textField.text,
            let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
-            
             
             if textField == self.usernameTextField {
                 if updatedText.isEmpty {
@@ -51,21 +50,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 else {
                     passwordTextFieldvalid = false
                 }
-                
             }
-            
         }
         if usernameTextFieldvalid && passwordTextFieldvalid {
-            self.loginOutlet.backgroundColor = UIColor.init(red: 255/255, green: 162/255, blue: 5/255, alpha: 1.0)
+            self.loginButton.backgroundColor = UIColor.init(red: 255/255, green: 162/255, blue: 5/255, alpha: 1.0)
         }
         else{
-            self.loginOutlet.backgroundColor = UIColor.init(red: 128/255, green: 102/255, blue: 56/255, alpha: 1.0)
+            self.loginButton.backgroundColor = UIColor.init(red: 128/255, green: 102/255, blue: 56/255, alpha: 1.0)
         }
         return true
     }
     
     
-    @IBAction func loginBtn(_ sender: Any){
+    @IBAction func loginButtonTapped(_ sender: Any){
         if (usernameTextField.text?.isEmpty ?? true) {
             self.errorLabel.text = "username is empty"
             return
@@ -82,7 +79,4 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.show(vc!, sender: nil)
         
     }
-    
-
-    
 }

@@ -10,20 +10,19 @@ import RealmSwift
 
 class SecondViewController: UIViewController, UITextFieldDelegate {
     
-    
-    @IBOutlet weak var titleTF: UITextField!
-    @IBOutlet weak var yearTF: UITextField!
-    @IBOutlet weak var seasonTF: UITextField!
-    @IBOutlet weak var saveTap: UIButton!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var yearTextField: UITextField!
+    @IBOutlet weak var seasonTextField: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
     
     var realm : Realm?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.saveTap.isEnabled = false
-        self.saveTap.backgroundColor = UIColor.init(red: 128/255, green: 102/255, blue: 56/255, alpha: 1.0)
-        self.titleTF.delegate = self
+        self.saveButton.isEnabled = false
+        self.saveButton.backgroundColor = UIColor.init(red: 128/255, green: 102/255, blue: 56/255, alpha: 1.0)
+        self.titleTextField.delegate = self
         
         realm = try! Realm()
     }
@@ -36,32 +35,28 @@ class SecondViewController: UIViewController, UITextFieldDelegate {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
             
             if updatedText.count > 1 {
-                self.saveTap.isEnabled = true
-                self.saveTap.backgroundColor = UIColor.init(red: 255/255, green: 162/255, blue: 5/255, alpha: 1.0)
+                self.saveButton.isEnabled = true
+                self.saveButton.backgroundColor = UIColor.init(red: 255/255, green: 162/255, blue: 5/255, alpha: 1.0)
             }
             else {
-                self.saveTap.isEnabled = false
-                self.saveTap.backgroundColor = UIColor.init(red: 128/255, green: 102/255, blue: 56/255, alpha: 1.0)
-                
+                self.saveButton.isEnabled = false
+                self.saveButton.backgroundColor = UIColor.init(red: 128/255, green: 102/255, blue: 56/255, alpha: 1.0)
             }
-            
         }
-        
         return true
     }
     
-    
-    @IBAction func backBtn1(_ sender: UIButton) {
+    @IBAction func backButtonTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func saveBtn(_ sender: Any) {
+    @IBAction func saveButtonTapped(_ sender: Any) {
         
         let movie = Movie()
         
-        movie.title = titleTF.text ?? ""
-        movie.year = Int(yearTF.text ?? "") ?? 0
-        movie.numOfSeasons = Int(seasonTF.text ?? "") ?? 0
+        movie.title = titleTextField.text ?? ""
+        movie.year = Int(yearTextField.text ?? "") ?? 0
+        movie.numOfSeasons = Int(seasonTextField.text ?? "") ?? 0
         
         try! realm?.write {
             realm?.add(movie)
@@ -70,7 +65,4 @@ class SecondViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.show(vc!, sender: nil)
         
     }
-    
-    
-    
 }
